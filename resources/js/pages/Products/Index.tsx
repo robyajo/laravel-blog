@@ -10,7 +10,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export  default function Dashboard() {
+export default function Dashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
@@ -18,7 +18,7 @@ export  default function Dashboard() {
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
                     <Link href="/category-products/create">
                         <Button className="m-4" variant="default">
-                            Products
+                            Create Product
                         </Button>
                     </Link>
                 </div>

@@ -47,14 +47,27 @@ class CategoryProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        CategoryProduct::create($validated);
+
+        return redirect()->route('cat_products.index')
+            ->with('success', 'Category created successfully!');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $category = CategoryProduct::findOrFail($id);
+        return Inertia::render('CategoryProducts/Show', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -62,7 +75,16 @@ class CategoryProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = CategoryProduct::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category->update($validated);
+
+        return redirect()->route('cat_products.index')
+            ->with('success', 'Category updated successfully!');
     }
 
     /**
